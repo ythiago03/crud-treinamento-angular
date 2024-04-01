@@ -1,0 +1,54 @@
+<form [formGroup]="formCliente" (ngSubmit)="onSubmit()" class="form-container container col" >
+
+  <div class="row">
+    <div class="col-md-10 black">
+      <label for="inputName" class="form-label">Nome</label>
+      <input formControlName="nome" name="nome" type="name" class="form-control" id="inputName" >
+    </div>
+    <div class="col-md-10 ">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input formControlName="email" name="email" type="email" class="form-control" id="inputEmail" placeholder="Email@mail.com">
+    </div>
+    <div class="col-md-10">
+      <label for="inputCpf" class="form-label">CPF</label>
+      <input formControlName="cpf" name="cpf" type="number" class="form-control" id="inputCpf" min="11" max="11"  mask="CPF_CNPJ">
+    </div>
+  </div>
+  
+ <div class="row">
+    <div class="col-md-5">
+      <label for="inputDataNascimento" class="form-label">Data de Nascimento</label>
+      <input formControlName="dataNascimento" name="dataNascimento" type="date" class="form-control" id="inputDataNascimento" >
+    </div>
+    <div class="col-md-5">
+      <label for="inputCEP" class="form-label">CEP</label>
+      <input formControlName="cep" name="cep" type="number" class="form-control" id="inputCEP">
+    </div>
+ </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <label for="inputLogradouro" class="form-label">Logradouro</label>
+      <input formControlName="logradouro" name="logradouro" type="text" class="form-control" id="inputLogradouro" placeholder="Ex: Rua fulano de tal">
+    </div>
+    <div class="col-md-3">
+      <label for="inputNumeroCasa" class="form-label">Número</label>
+      <input formControlName="numeroCasa" name="numeroCasa" type="number" class="form-control" id="inputNumeroCasa">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <label for="inputBairro" class="form-label">Bairro</label>
+      <input formControlName="bairro" name="bairro" type="text" class="form-control" id="inputBairro" placeholder="Ex: Bairro das Flores">
+    </div>
+    <div class="col-md-3">
+      <label for="inputComplemento" class="form-label">Complemento</label>
+      <input formControlName="complemento" name="complemento" type="text" class="form-control" id="inputComplemento">
+    </div>
+    <button class="btn col-md-10 btn-primary mt-md-4" type="submit">Enviar</button>
+  </div>
+
+  
+
+</form>
