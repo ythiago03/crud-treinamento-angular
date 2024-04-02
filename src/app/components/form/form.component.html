@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-10 black">
       <label for="inputName" class="form-label">Nome</label>
-      <input formControlName="nome" name="nome" type="name" class="form-control" id="inputName" >
+      <input formControlName="name" name="name" type="name" class="form-control" id="inputName" placeholder="Nome Completo" >
     </div>
     <div class="col-md-10 ">
       <label for="inputEmail" class="form-label">Email</label>
@@ -11,40 +11,40 @@
     </div>
     <div class="col-md-10">
       <label for="inputCpf" class="form-label">CPF</label>
-      <input formControlName="cpf" name="cpf" type="number" class="form-control" id="inputCpf" min="11" max="11"  mask="CPF_CNPJ">
+      <input formControlName="cpf" name="cpf" type="number" class="form-control" id="inputCpf" min="11" max="11"  placeholder="000.000.000-00">
     </div>
   </div>
   
  <div class="row">
     <div class="col-md-5">
       <label for="inputDataNascimento" class="form-label">Data de Nascimento</label>
-      <input formControlName="dataNascimento" name="dataNascimento" type="date" class="form-control" id="inputDataNascimento" >
+      <input formControlName="birthday" name="birthday" type="date" class="form-control" id="inputDataNascimento" >
     </div>
     <div class="col-md-5">
       <label for="inputCEP" class="form-label">CEP</label>
-      <input formControlName="cep" name="cep" type="number" class="form-control" id="inputCEP">
+      <input formControlName="zipCode" name="zipCode" type="number" class="form-control" id="inputCEP" placeholder=" 00000-000" (blur)="getAddress($event)">
     </div>
  </div>
 
   <div class="row">
     <div class="col-md-7">
       <label for="inputLogradouro" class="form-label">Logradouro</label>
-      <input formControlName="logradouro" name="logradouro" type="text" class="form-control" id="inputLogradouro" placeholder="Ex: Rua fulano de tal">
+      <input formControlName="street" name="street" type="text" class="form-control" id="inputLogradouro" placeholder="Ex: Rua fulano de tal">
     </div>
     <div class="col-md-3">
       <label for="inputNumeroCasa" class="form-label">Número</label>
-      <input formControlName="numeroCasa" name="numeroCasa" type="number" class="form-control" id="inputNumeroCasa">
+      <input formControlName="number" name="number" type="number" class="form-control" id="inputNumeroCasa" placeholder="00">
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-7">
       <label for="inputBairro" class="form-label">Bairro</label>
-      <input formControlName="bairro" name="bairro" type="text" class="form-control" id="inputBairro" placeholder="Ex: Bairro das Flores">
+      <input formControlName="district" name="district" type="text" class="form-control" id="inputBairro" placeholder="Ex: Bairro das Flores">
     </div>
     <div class="col-md-3">
       <label for="inputComplemento" class="form-label">Complemento</label>
-      <input formControlName="complemento" name="complemento" type="text" class="form-control" id="inputComplemento">
+      <input formControlName="complement" name="complement" type="text" class="form-control" id="inputComplemento" placeholder="Ex: A">
     </div>
     <button class="btn col-md-10 btn-primary mt-md-4" type="submit">Enviar</button>
   </div>

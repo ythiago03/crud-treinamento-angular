@@ -1,11 +1,11 @@
 export class Cliente {
-    nome: string = '';
+    name: string = '';
     email: string = '';
-    cpf: number = 0;
-    dataNascimento: string = '';
-    cep: number = 0;
-    logradouro: string = '';
-    numeroCasa: number = 0;
-    bairro: string = '';
-    complemento: string = '';
+    cpf: string = '';
+    birthday: string = '';
+    zipCode: string = '';
+    street: string = '';
+    number: string = '';
+    district: string = '';
+    complement: string = '';
 }
