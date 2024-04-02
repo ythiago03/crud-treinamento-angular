@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Cliente } from 'src/app/clientes/shared/cliente';
 import { DbService } from 'src/app/services/db.service';
 import { ViacepService } from 'src/app/services/viacep.service';
@@ -12,6 +12,7 @@ import { ViacepService } from 'src/app/services/viacep.service';
 
 export class FormComponent implements OnInit {
   formCliente!: FormGroup;
+  formSubmited: boolean = false;
 
   constructor(private viacepService: ViacepService, private db: DbService) {
 
@@ -23,21 +24,44 @@ export class FormComponent implements OnInit {
 
   createForm(clienteData: Cliente) {
     this.formCliente = new FormGroup({
-      name: new FormControl(clienteData.name),
-      email: new FormControl(clienteData.email),
-      cpf: new FormControl(clienteData.cpf),
-      birthday: new FormControl(clienteData.birthday),
-      zipCode: new FormControl(clienteData.zipCode),
-      street: new FormControl(clienteData.street),
-      number: new FormControl(clienteData.number),
-      district: new FormControl(clienteData.district),
+      name: new FormControl(clienteData.name, [
+        Validators.minLength(2),
+        Validators.maxLength(50)
+      ]),
+      email: new FormControl(clienteData.email, [
+        Validators.required,
+        Validators.email
+      ]),
+      cpf: new FormControl(clienteData.cpf, [
+        Validators.required,
+        Validators.min(11)
+      ]),
+      birthday: new FormControl(clienteData.birthday, [
+        Validators.required
+      ]),
+      zipCode: new FormControl(clienteData.zipCode, [
+        Validators.required
+      ]),
+      street: new FormControl(clienteData.street, [
+        Validators.required
+      ]),
+      number: new FormControl(clienteData.number, [
+        Validators.required
+      ]),
+      district: new FormControl(clienteData.district, [
+        Validators.required
+      ]),
       complement: new FormControl(clienteData.complement)
-    })
+    }) 
   }
 
+
   onSubmit() {
-    this.db.postCustomer(this.formCliente.value).subscribe(response => console.log(response)
-    )
+    if(this.formCliente.valid){
+      this.db.postCustomer(this.formCliente.value).subscribe(response => console.log(response))
+      return;
+    }
+    this.formSubmited = true
   }
 
   getAddress(event: any){

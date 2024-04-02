@@ -8,12 +8,14 @@ import { FormComponent } from './components/form/form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FormComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

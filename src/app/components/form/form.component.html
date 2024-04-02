@@ -1,17 +1,33 @@
+<app-header></app-header>
+
 <form [formGroup]="formCliente" (ngSubmit)="onSubmit()" class="form-container container col" >
 
   <div class="row">
     <div class="col-md-10 black">
       <label for="inputName" class="form-label">Nome</label>
-      <input formControlName="name" name="name" type="name" class="form-control" id="inputName" placeholder="Nome Completo" >
+      <input formControlName="name" name="name" type="name" class="form-control" id="inputName" placeholder="Nome Completo" required >
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('name')?.hasError('required')">
+        Nome precisa de 2 à 50 caracteres!
+      </span>
     </div>
+
     <div class="col-md-10 ">
       <label for="inputEmail" class="form-label">Email</label>
       <input formControlName="email" name="email" type="email" class="form-control" id="inputEmail" placeholder="Email@mail.com">
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('email')?.hasError('required')">
+        Email precisa ser de um tipo válido!
+      </span>
     </div>
+
     <div class="col-md-10">
       <label for="inputCpf" class="form-label">CPF</label>
       <input formControlName="cpf" name="cpf" type="number" class="form-control" id="inputCpf" min="11" max="11"  placeholder="000.000.000-00">
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('cpf')?.hasError('required')">
+        Cpf é um campo obrigatório!
+      </span>
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('cpf')?.hasError('minLength')">
+        Cpf precisa ter 11 digitos!
+      </span>
     </div>
   </div>
   
@@ -19,10 +35,16 @@
     <div class="col-md-5">
       <label for="inputDataNascimento" class="form-label">Data de Nascimento</label>
       <input formControlName="birthday" name="birthday" type="date" class="form-control" id="inputDataNascimento" >
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('birthday')?.hasError('required')">
+        Data de nascimento é um campo obrigatório!
+      </span>
     </div>
     <div class="col-md-5">
       <label for="inputCEP" class="form-label">CEP</label>
       <input formControlName="zipCode" name="zipCode" type="number" class="form-control" id="inputCEP" placeholder=" 00000-000" (blur)="getAddress($event)">
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('zipCode')?.hasError('required')">
+        CEP é um campo obrigatório!
+      </span>
     </div>
  </div>
 
@@ -30,10 +52,16 @@
     <div class="col-md-7">
       <label for="inputLogradouro" class="form-label">Logradouro</label>
       <input formControlName="street" name="street" type="text" class="form-control" id="inputLogradouro" placeholder="Ex: Rua fulano de tal">
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('street')?.hasError('required')">
+        Nome da rua é um campo obrigatório!
+      </span>
     </div>
     <div class="col-md-3">
       <label for="inputNumeroCasa" class="form-label">Número</label>
       <input formControlName="number" name="number" type="number" class="form-control" id="inputNumeroCasa" placeholder="00">
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('number')?.hasError('required')">
+        Número é um campo obrigatório!
+      </span>
     </div>
   </div>
 
@@ -41,6 +69,9 @@
     <div class="col-md-7">
       <label for="inputBairro" class="form-label">Bairro</label>
       <input formControlName="district" name="district" type="text" class="form-control" id="inputBairro" placeholder="Ex: Bairro das Flores">
+      <span class="text-danger" *ngIf="formSubmited && formCliente.get('district')?.hasError('required')">
+        Bairro é um campo obrigatório!
+      </span>
     </div>
     <div class="col-md-3">
       <label for="inputComplemento" class="form-label">Complemento</label>
