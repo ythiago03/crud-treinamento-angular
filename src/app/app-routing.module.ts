@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FormComponent } from './components/form/form.component';
-import { SearchComponent } from './components/search/search.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-    {path: '', pathMatch: 'full', component: FormComponent},
-    {path: 'editar', pathMatch: 'full', component: HeaderComponent},
-    {path: 'excluir', pathMatch: 'full', component: HeaderComponent},
-    {path: 'pesquisar', pathMatch: 'full', component: SearchComponent}
+    {path: '', pathMatch: 'full', component: LoginComponent},
+    {path: 'search', pathMatch: 'full', component: HomeComponent},
 ];
 
 @NgModule({

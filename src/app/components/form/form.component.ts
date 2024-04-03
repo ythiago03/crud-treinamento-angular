@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Cliente } from 'src/app/clientes/shared/cliente';
 import { DbService } from 'src/app/services/db.service';
 import { ViacepService } from 'src/app/services/viacep.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -14,7 +15,7 @@ export class FormComponent implements OnInit {
   formCliente!: FormGroup;
   formSubmited: boolean = false;
 
-  constructor(private viacepService: ViacepService, private db: DbService) {
+  constructor(private viacepService: ViacepService, private db: DbService, private router: Router) {
 
    }
 
@@ -25,6 +26,7 @@ export class FormComponent implements OnInit {
   createForm(clienteData: Cliente) {
     this.formCliente = new FormGroup({
       name: new FormControl(clienteData.name, [
+        Validators.required,
         Validators.minLength(2),
         Validators.maxLength(50)
       ]),
@@ -57,8 +59,12 @@ export class FormComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.formCliente.value);
+    console.log(this.formCliente.valid);
     if(this.formCliente.valid){
-      this.db.postCustomer(this.formCliente.value).subscribe(response => console.log(response))
+      console.log(this.formCliente.value);
+      //this.db.postCustomer(this.formCliente.value).subscribe(response => console.log(response))
+      this.router.navigate(['/search'])
       return;
     }
     this.formSubmited = true
