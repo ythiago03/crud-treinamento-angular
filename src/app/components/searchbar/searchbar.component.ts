@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Search } from 'src/app/clientes/search/search';
 import { DbService } from 'src/app/services/db.service';
 
@@ -10,6 +11,7 @@ import { DbService } from 'src/app/services/db.service';
 })
 export class SearchbarComponent implements OnInit {
   formSearch!: FormGroup;
+  clients: any;
 
   constructor(private db: DbService) { }
 
@@ -24,7 +26,9 @@ export class SearchbarComponent implements OnInit {
   }
 
   searchClient(){
-    this.db.getCustomer(this.formSearch.value)
+    this.db.getCustomer(this.formSearch.value).subscribe(res => {
+      this.clients = res;
+    });
   }
 
 }

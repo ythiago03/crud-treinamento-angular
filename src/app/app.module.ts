@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { ClientComponent } from './components/client/client.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SearchbarComponent } from './components/searchbar/searchbar.component';
     LoginComponent,
     SearchbarComponent,
     HeaderComponent,
-    FormComponent
+    FormComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

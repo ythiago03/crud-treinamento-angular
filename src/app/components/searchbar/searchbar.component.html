@@ -1,12 +1,47 @@
-<form class="container col form-search justify-content-center" [formGroup]="formSearch" (ngSubmit)="searchClient()">
-    <div class="row">
-        <input 
-            formControlName="name"
-            class="form-control col-md-10  mr-sm-2" 
-            type="search" 
-            placeholder="Insira o nome do cliente para buscar" 
-            aria-label="Search"
-        >
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-    </div>
-  </form>
+<section class="container">
+    <form class="container col form-search justify-content-center" [formGroup]="formSearch" (ngSubmit)="searchClient()">
+        <div class="row">
+            <input 
+                formControlName="name"
+                class="form-control col-md-10  mr-sm-2" 
+                type="search" 
+                placeholder="Insira o nome do cliente para buscar" 
+                aria-label="Search"
+            >
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </div>
+
+        
+    </form>
+
+    <table class="table mt-md-4">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">CEP</th>
+            <th scope="col">Rua</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Complemento</th>
+            <th scope="col" class="text-danger">Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients, index as i ">
+            <th scope="row">{{i+1}}</th>
+            <td>{{client.name}}</td>
+            <td>{{client.email}}</td>
+            <td>{{client.birthday}}</td>
+            <td>{{client.zipCode}}</td>
+            <td>{{client.street}}</td>
+            <td>{{client.district}}</td>
+            <td>{{client.complement}}</td>
+            <td>
+              <button type="button" class="btn btn-danger">Excluir</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</section>

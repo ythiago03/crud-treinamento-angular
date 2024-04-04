@@ -59,11 +59,8 @@ export class FormComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.formCliente.value);
-    console.log(this.formCliente.valid);
     if(this.formCliente.valid){
-      console.log(this.formCliente.value);
-      //this.db.postCustomer(this.formCliente.value).subscribe(response => console.log(response))
+      this.db.postCustomer(this.formCliente.value).subscribe(res => {console.log(res)})
       this.router.navigate(['/search'])
       return;
     }
