@@ -1,5 +1,5 @@
 <section class="container">
-    <form class="container col form-search justify-content-center" [formGroup]="formSearch" (ngSubmit)="searchClient()">
+    <form class="container col form-search justify-content-center mb-md-5" [formGroup]="formSearch" (ngSubmit)="searchClient()">
         <div class="row">
             <input 
                 formControlName="name"
@@ -10,36 +10,142 @@
             >
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
         </div>
-
-        
+        <div class="row">
+          <span class="text-danger" *ngIf="isFormValid && formSearch.get('name')?.hasError('required')">
+            Nome é um campo obrigatório!
+          </span>  
+        </div>
     </form>
 
-    <table class="table mt-md-4">
+    <table *ngIf="showList" class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">CPF</th>
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Data de Nascimento</th>
             <th scope="col">CEP</th>
             <th scope="col">Rua</th>
             <th scope="col">Bairro</th>
+            <th scope="col">Número</th>
             <th scope="col">Complemento</th>
-            <th scope="col" class="text-danger">Excluir</th>
+            <th scope="col" >Editar/Salvar</th>
+            <th scope="col" class="text-danger">Excluir/Cancelar</th>   
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let client of clients, index as i ">
-            <th scope="row">{{i+1}}</th>
-            <td>{{client.name}}</td>
-            <td>{{client.email}}</td>
-            <td>{{client.birthday}}</td>
-            <td>{{client.zipCode}}</td>
-            <td>{{client.street}}</td>
-            <td>{{client.district}}</td>
-            <td>{{client.complement}}</td>
+          <tr *ngFor="let client of clients" [ngClass]="{'isActive': client.isActive}">
+            <th scope="row">{{client.cpf}}</th>
+            <td *ngIf="!client.isActive">{{client.name}}</td>
+            <td *ngIf="client.isActive">
+              <input 
+                formControlName="name" 
+                name="name" 
+                type="name" 
+                class="form-control" 
+                id="inputName" 
+                placeholder="Nome Completo" 
+                required 
+                value="{{client.name}}"
+              >
+            </td>
+            <td *ngIf="!client.isActive">{{client.email}}</td>
+            <td *ngIf="client.isActive">
+              <input 
+              formControlName="email" 
+              name="email" 
+              type="email" 
+              class="form-control" 
+              id="inputEmail" 
+              placeholder="Email@mail.com"
+              value="{{client.email}}"
+            >
+            </td>
+            
+            <td *ngIf="!client.isActive">{{client.birthday}}</td>
+            <td *ngIf="client.isActive">
+              <input 
+              formControlName="birthday" 
+              name="birthday" 
+              type="date" 
+              class="form-control" 
+              id="inputDataNascimento" 
+              value="{{client.birthday}}"
+            >
+            </td>
+            
+            <td *ngIf="!client.isActive">{{client.zipCode}}</td>
+            <td *ngIf="client.isActive">
+              <input 
+              formControlName="zipCode" 
+              name="zipCode" type="number" 
+              class="form-control" 
+              id="inputCEP" 
+              placeholder=" 00000-000" 
+              value="{{client.zipCode}}"
+            >
+            </td>
+            
+            <td *ngIf="!client.isActive">{{client.street}}</td>
+            <td *ngIf="client.isActive">
+              <input 
+              formControlName="street" 
+              name="street" 
+              type="text" 
+              class="form-control" 
+              id="inputLogradouro" 
+              placeholder="Ex: Rua fulano de tal"
+              value="{{client.street}}"
+            >
+            </td>
+            
+            <td *ngIf="!client.isActive">{{client.district}}</td>
+            <td *ngIf="client.isActive">
+              <input 
+              formControlName="district" 
+              name="district" 
+              type="text" 
+              class="form-control" 
+              id="inputBairro" 
+              placeholder="Ex: Bairro das Flores"
+              value="{{client.district}}"
+            >
+            </td>
+            
+            <td *ngIf="!client.isActive">{{client.number}}</td>
+            <td *ngIf="client.isActive">
+              <input 
+              formControlName="number" 
+              name="number" 
+              type="number" 
+              class="form-control" 
+              id="inputNumeroCasa" 
+              placeholder="00"
+              value="{{client.number}}"
+            >
+            </td>
+            <td *ngIf="!client.isActive">
+              {{client.complement}}
+            </td>
+            <td *ngIf="client.isActive">
+              <input 
+              formControlName="complement" 
+              name="complement" 
+              type="text" 
+              class="form-control" 
+              id="inputComplemento" 
+              placeholder="Ex: A"
+              value="{{client.complement}}"
+            >
+            </td>
+            
             <td>
-              <button type="button" class="btn btn-danger">Excluir</button>
+              <button *ngIf="!client.isActive" type="button" class="btn btn-primary" (click)="client.isActive = !client.isActive">Editar</button>
+              <button *ngIf="client.isActive" type="button" class="btn btn-primary" (click)="salvarEditar(client.cpf)">Salvar</button>
+            </td>
+            <td>
+              <button *ngIf="!client.isActive" type="button" class="btn btn-danger" (click)="deleteClient(client.cpf)" >Excluir</button>
+              <button *ngIf="client.isActive" type="button" class="btn btn-danger" (click)="client.isActive = !client.isActive">Cancelar</button>
             </td>
           </tr>
         </tbody>

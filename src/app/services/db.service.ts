@@ -20,4 +20,8 @@ export class DbService {
     return this.http.get(`${this.url}/${search.name}`);
   }   
 
+  deleteCustomer(cpf: string){
+    return this.http.delete(`${this.url}/${cpf}`);
+  }
+
 }
