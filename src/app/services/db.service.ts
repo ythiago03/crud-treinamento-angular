@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Search } from '../clientes/search/search';
+import { FormSearch } from '../clientes/search/formSearch';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class DbService {
 
   deleteCustomer(cpf: string){
     return this.http.delete(`${this.url}/${cpf}`);
+  }
+
+  putCustomer(cpf: string, formSearch: FormSearch){
+    return this.http.put(`${this.url}/${cpf}`, formSearch)
   }
 
 }
