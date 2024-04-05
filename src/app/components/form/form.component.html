@@ -1,4 +1,8 @@
 
+<div *ngIf="alertToggle" class="alert alert-success" role="alert">
+  Cliente cadastrado com sucesso!
+</div>
+
 <form [formGroup]="formCliente" (ngSubmit)="onSubmit()" class="form-container container col" >
 
   <div class="row">

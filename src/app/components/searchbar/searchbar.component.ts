@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { FormSearch } from 'src/app/clientes/search/formSearch';
 import { Search } from 'src/app/clientes/search/search';
 import { DbService } from 'src/app/services/db.service';
+import { timer } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-searchbar',
@@ -16,6 +18,8 @@ export class SearchbarComponent implements OnInit {
   clients: any;
   isFormValid: boolean = false;
   showList: boolean = false;
+  alertToggle: boolean = false;
+  alertToggleDelete: boolean = false;
 
   constructor(private db: DbService) { }
 
@@ -52,27 +56,38 @@ export class SearchbarComponent implements OnInit {
       this.db.getCustomer(this.formSearch.value).subscribe(res => {
         this.clients = res;
         this.showList = true;
+        console.log(res);
+        
       });
       this.isFormValid = true
-    }
+    } 
   }
 
   deleteClient(cpf: string){
     this.db.deleteCustomer(cpf).subscribe(res => {
-      alert('Cliente deletado com sucesso!')
+      this.alertToggleDelete = true;
       this.searchClient();
+      this.closeAlert();
     }); 
   }
 
 
-  
-
-  salvarEditar(cpf: string){
+  salvarEditar(cpf: string, i: number){
     this.db.putCustomer(cpf, this.formClients.value).subscribe(res => {
-      alert('Cliente editado com sucesso!')
+      this.clients[i].isActive = !this.clients[i].isActive;
+      this.alertToggle = true;
       this.searchClient();
+      this.closeAlert();
     }); 
   }
-  
+
+
+  closeAlert(){
+    setTimeout(() => {
+      this.alertToggle = false;
+      this.alertToggleDelete = false;
+    }, 5 * 1000)
+  }
+
 
 }

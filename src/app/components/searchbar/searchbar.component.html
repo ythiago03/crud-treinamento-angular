@@ -17,6 +17,13 @@
         </div>
     </form>
 
+    <div *ngIf="alertToggle" class="alert alert-success" role="alert">
+      Cliente editado com sucesso!
+    </div>
+    <div *ngIf="alertToggleDelete" class="alert alert-success" role="alert">
+      Cliente deletado com sucesso!
+    </div>
+
     <form [formGroup]="formClients">
       <table *ngIf="showList" class="table">
           <thead>
@@ -35,7 +42,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let client of clients" [ngClass]="{'isActive': client.isActive}">
+            <tr *ngFor="let client of clients, index as i" [ngClass]="{'isActive': client.isActive}">
               <th scope="row">{{client.cpf}}</th>
               <td *ngIf="!client.isActive">{{client.name}}</td>
               <td *ngIf="client.isActive">
@@ -142,10 +149,10 @@
               
               <td>
                 <button *ngIf="!client.isActive" type="button" class="btn btn-primary" (click)="client.isActive = !client.isActive">Editar</button>
-                <button *ngIf="client.isActive" type="button" class="btn btn-primary" (click)="salvarEditar(client.cpf)">Salvar</button>
+                <button *ngIf="client.isActive" type="button" class="btn btn-primary" (click)="salvarEditar(client.cpf, i)">Salvar</button>
               </td>
               <td>
-                <button *ngIf="!client.isActive" type="button" class="btn btn-danger" (click)="deleteClient(client.cpf)" >Excluir</button>
+                <button *ngIf="!client.isActive" type="button" class="btn btn-danger" (click)="deleteClient(client.cpf)">Excluir</button>
                 <button *ngIf="client.isActive" type="button" class="btn btn-danger" (click)="client.isActive = !client.isActive">Cancelar</button>
               </td>
             </tr>

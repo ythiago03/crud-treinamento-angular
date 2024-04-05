@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Cliente } from 'src/app/clientes/shared/cliente';
 import { DbService } from 'src/app/services/db.service';
 import { ViacepService } from 'src/app/services/viacep.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -14,8 +13,9 @@ import { Router } from '@angular/router';
 export class FormComponent implements OnInit {
   formCliente!: FormGroup;
   formSubmited: boolean = false;
+  alertToggle: boolean = false;
 
-  constructor(private viacepService: ViacepService, private db: DbService, private router: Router) {
+  constructor(private viacepService: ViacepService, private db: DbService) {
 
    }
 
@@ -60,8 +60,11 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     if(this.formCliente.valid){
-      this.db.postCustomer(this.formCliente.value).subscribe(res => alert(`Cliente cadastrado com sucesso!`))
-      this.router.navigate(['/search'])
+      this.db.postCustomer(this.formCliente.value).subscribe(res => {
+        this.alertToggle = true;
+        this.closeAlert()
+        this.createForm(new Cliente());
+      })
       return;
     }
     this.formSubmited = true
@@ -77,6 +80,12 @@ export class FormComponent implements OnInit {
   preencherEndereco(response: any){ 
     this.formCliente.get('street')?.setValue(response.logradouro);
     this.formCliente.get('district')?.setValue(response.bairro);
+  }
+
+  closeAlert(){
+    setTimeout(() => {
+      this.alertToggle = false;
+    }, 5 * 1000)
   }
 
 }
